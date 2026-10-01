@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI 영어 MG·AR·BL·BT 레벨별 통합 목차">
+  <title>AI English · Level Curriculum Map</title>
+  <link rel="stylesheet" href="styles.css?v=20260917-6">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="처음으로">
+        <span class="brand-mark">A<span>·</span>E</span>
+        <span><b>Level Map</b><small>MG · AR · BL · BT</small></span>
+      </a>
+
+      <nav class="program-nav" aria-label="학습 레벨">
+        <p class="eyebrow" id="sideNavLabel">LEVELS</p>
+        <div id="levelNav"></div>
+        <div id="programNav" hidden></div>
+      </nav>
+
+      <div class="sidebar-note">
+        <span class="status-dot"></span>
+        <div><b>4개 프로그램 통합</b><small>동일 회차 가로 비교</small></div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="메뉴 열기">☰</button>
+        <label class="search">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="회차, 주제, 프롬프트 코드 검색" autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </label>
+        <label class="mobile-level">
+          <span>레벨</span>
+          <select id="mobileLevelSelect" aria-label="레벨 선택"></select>
+        </label>
+        <div class="source-pill">Outline 2026.08.21 · Prompts 2026.03.05</div>
+      </header>
+
+      <section class="content">
+        <div class="view-tabs" role="tablist" aria-label="목차 보기 방식">
+          <button class="active" id="levelTab" role="tab" aria-selected="true">레벨별 통합</button>
+          <button id="programTab" role="tab" aria-selected="false">프로그램별 탐색</button>
+        </div>
+        <div class="prompt-data-banner" id="promptDataBanner">
+          <span class="status-dot"></span>
+          <strong>상세 데이터 연결됨</strong>
+          <span id="promptDataSummary">불러오는 중…</span>
+        </div>
+        <div id="levelView" class="view-panel">
+        <div class="hero level-hero">
+          <div>
+            <p class="eyebrow">LEVEL-CENTERED CURRICULUM</p>
+            <h1><span id="levelCode">BG1</span>의 하루를<br><em>한 장에 연결하다</em></h1>
+            <p id="levelDescription" class="hero-copy"></p>
+          </div>
+          <div class="hero-stats" id="heroStats"></div>
+        </div>
+
+        <section class="daily-flow" aria-labelledby="flowHeading">
+          <div class="section-heading">
+            <div><p class="eyebrow">DAILY FLOW</p><h2 id="flowHeading">하루 콘텐츠 흐름</h2></div>
+            <p>같은 회차의 네 콘텐츠를 왼쪽에서 오른쪽으로 비교합니다.</p>
+          </div>
+          <div class="flow-track">
+            <article style="--flow:#eea949"><span>01</span><b>MG</b><strong>Morning Greeting</strong><small>아침 인사</small></article>
+            <i>→</i>
+            <article style="--flow:#65a4a1"><span>02</span><b>AR</b><strong>Afternoon Routine</strong><small>오후 일상</small></article>
+            <i>→</i>
+            <article style="--flow:#8a7da7"><span>03</span><b>BL</b><strong>Background Listening</strong><small>배경 청취</small></article>
+            <i>→</i>
+            <article style="--flow:#496c91"><span>04</span><b>BT</b><strong>Bedtime Talk</strong><small>취침 대화</small></article>
+          </div>
+        </section>
+
+        <section class="catalog" aria-labelledby="catalogHeading">
+          <div class="catalog-header">
+            <div><p class="eyebrow">INTEGRATED OUTLINE</p><h2 id="catalogHeading">레벨별 통합 목차</h2></div>
+            <div class="result-count"><strong id="resultCount">0</strong><span>rounds</span></div>
+          </div>
+
+          <div class="filterbar">
+            <div class="segmented" id="typeFilters" aria-label="회차 유형 필터"></div>
+            <p class="table-hint">카드는 전체 정보를 펼치고, 프롬프트 코드는 상세 원문을 엽니다.</p>
+          </div>
+          <div id="activeFilters" class="active-filters" aria-live="polite"></div>
+
+          <div class="curriculum-wrap">
+            <div class="matrix-head" aria-hidden="true">
+              <span>회차</span>
+              <span><b>MG</b> Morning</span>
+              <span><b>AR</b> Afternoon</span>
+              <span><b>BL</b> Listening</span>
+              <span><b>BT</b> Bedtime</span>
+            </div>
+            <div id="curriculumList" class="curriculum-list"></div>
+          </div>
+          <button id="loadMore" class="load-more" type="button">더 보기</button>
+          <div id="emptyState" class="empty-state" hidden>
+            <span>⌕</span><h3>검색 결과가 없습니다</h3><p>검색어나 필터를 바꿔 보세요.</p>
+          </div>
+        </section>
+        </div>
+
+        <div id="programView" class="view-panel" hidden>
+          <div class="program-search-row">
+            <label class="search program-search">
+              <span aria-hidden="true">⌕</span>
+              <input id="pSearchInput" type="search" placeholder="선택한 프로그램에서 주제·코드 검색" autocomplete="off">
+            </label>
+          </div>
+          <div class="hero">
+            <div>
+              <p class="eyebrow" id="pProgramCode">MORNING GREETING · MG</p>
+              <h1 id="pProgramTitle">하루의 시작을 여는<br><em>Morning Greeting</em></h1>
+              <p id="pProgramDescription" class="hero-copy"></p>
+            </div>
+            <div class="hero-stats" id="pHeroStats"></div>
+          </div>
+
+          <section class="level-roadmap" aria-labelledby="pLevelHeading">
+            <div class="section-heading">
+              <div><p class="eyebrow">LEARNING PATH</p><h2 id="pLevelHeading">레벨 로드맵</h2></div>
+              <p>레벨을 선택하면 해당 단계의 코드와 주제만 볼 수 있습니다.</p>
+            </div>
+            <div class="level-track" id="pLevelTrack"></div>
+          </section>
+
+          <section class="catalog" aria-labelledby="pCatalogHeading">
+            <div class="catalog-header">
+              <div><p class="eyebrow">CONTENT CATALOG</p><h2 id="pCatalogHeading">회차별 콘텐츠</h2></div>
+              <div class="result-count"><strong id="pResultCount">0</strong><span>items</span></div>
+            </div>
+            <div class="filterbar">
+              <div class="segmented" id="pTypeFilters"></div>
+              <label class="select-wrap"><span>보기</span><select id="pLevelSelect" aria-label="표시 레벨"></select></label>
+            </div>
+            <div id="pActiveFilters" class="active-filters" aria-live="polite"></div>
+            <div id="pLessonList" class="lesson-list"></div>
+            <button id="pLoadMore" class="load-more" type="button">더 보기</button>
+            <div id="pEmptyState" class="empty-state" hidden>
+              <span>⌕</span><h3>검색 결과가 없습니다</h3><p>검색어나 필터를 바꿔 보세요.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="prompt-modal" id="promptModal" role="dialog" aria-modal="true" aria-labelledby="promptModalTitle" hidden>
+    <button class="prompt-modal-backdrop" type="button" data-prompt-close aria-label="프롬프트 상세 닫기"></button>
+    <section class="prompt-modal-panel" tabindex="-1">
+      <header class="prompt-modal-header">
+        <div>
+          <p class="eyebrow">PROMPT DETAIL</p>
+          <h2 id="promptModalTitle">프롬프트 상세</h2>
+          <code id="promptModalCode"></code>
+        </div>
+        <button class="prompt-modal-close" type="button" data-prompt-close aria-label="닫기">×</button>
+      </header>
+      <div class="prompt-modal-meta" id="promptModalMeta"></div>
+      <div class="prompt-modal-body" id="promptModalBody"></div>
+    </section>
+  </div>
+
+  <script src="data/mg.js?v=20260917-5"></script>
+  <script src="data/ar.js?v=20260917-5"></script>
+  <script src="data/bl.js?v=20260917-5"></script>
+  <script src="data/bt.js?v=20260917-5"></script>
+  <script src="data/cca.js?v=20260917-5"></script>
+  <script src="data/prompt-details.js?v=20260917-6"></script>
+  <script src="prompt-viewer.js?v=20260917-6"></script>
+  <script src="app.js?v=20260917-6"></script>
+  <script src="program-app.js?v=20260917-6"></script>
+</body>
+</html>
